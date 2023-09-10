@@ -50,6 +50,7 @@ def get_missions(year: str = current_year, skip: int = 0, limit: int = 100, db: 
             "id": mission.id,
             "callsign": mission.callsign,
             "mission_number": mission.mission_number,
+            "ocean_basin": mission.storm.ocean_basin,
             "storm": mission.storm.name,
             "year": mission.storm.year
         })
@@ -68,6 +69,7 @@ def get_mission(mission_id: int, db: Session = Depends(get_db)):
         "id": query.id,
         "callsign": query.callsign,
         "mission_number": query.mission_number,
+        "ocean_basin": query.storm.ocean_basin,
         "storm": query.storm.name,
         "year": query.storm.year,
         "high_density_observations": []
@@ -85,21 +87,36 @@ def get_mission(mission_id: int, db: Session = Depends(get_db)):
         for observation in hdob.observations:
             obs_data = {
                 "id": observation.id,
+                "observation_time": observation.observation_time,
                 "hour": observation.hour,
                 "minute": observation.minute,
                 "second": observation.second,
                 "coordinates": observation.coordinates,
+                "latitude": observation.latitude,
+                "longitude": observation.longitude,
                 "aircraft_static_air_pressure": observation.aircraft_static_air_pressure,
+                "aircraft_static_air_pressure_inhg": observation.aircraft_static_air_pressure_inhg,
                 "aircraft_geopotential_height": observation.aircraft_geopotential_height,
+                "aircraft_geopotential_height_ft": observation.aircraft_geopotential_height_ft,
                 "extrapolated_surface_pressure": observation.extrapolated_surface_pressure,
+                "extrapolated_surface_pressure_inhg": observation.extrapolated_surface_pressure_inhg,
                 "air_temperature": observation.air_temperature,
+                "air_temperature_f": observation.air_temperature_f,
                 "dew_point": observation.dew_point,
+                "dew_point_f": observation.dew_point_f,
                 "wind_direction": observation.wind_direction,
+                "wind_cardinal_direction": observation.wind_cardinal_direction,
                 "wind_speed": observation.wind_speed,
+                "wind_speed_mph": observation.wind_speed_mph,
                 "peak_wind_speed": observation.peak_wind_speed,
+                "peak_wind_speed_mph": observation.peak_wind_speed_mph,
                 "sfmr_peak_surface_wind_speed": observation.sfmr_peak_surface_wind_speed,
-                "sfmr_surface_rate_rate": observation.sfmr_surface_rate_rate,
-                "quality_control_flags": observation.quality_control_flags
+                "sfmr_peak_surface_wind_speed_mph": observation.sfmr_peak_surface_wind_speed_mph,
+                "sfmr_surface_rain_rate": observation.sfmr_surface_rain_rate,
+                "sfmr_surface_rain_rate_in": observation.sfmr_surface_rain_rate_in,
+                "quality_control_flags": observation.quality_control_flags,
+                "first_flag_decoded": observation.first_flag_decoded,
+                "second_flag_decoded": observation.second_flag_decoded
             }
 
             hdob_data["observations"].append(obs_data)
