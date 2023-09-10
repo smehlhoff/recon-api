@@ -57,6 +57,8 @@ class Observation(Base):
     aircraft_geopotential_height_ft = Column(String)
     extrapolated_surface_pressure = Column(String)
     extrapolated_surface_pressure_inhg = Column(String)
+    d_value = Column(String)
+    d_value_ft = Column(String)
     air_temperature = Column(String)
     air_temperature_f = Column(String)
     dew_point = Column(String)

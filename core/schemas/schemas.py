@@ -16,6 +16,8 @@ class ObservationBase(BaseModel):
     aircraft_geopotential_height_ft: str | None
     extrapolated_surface_pressure: str | None
     extrapolated_surface_pressure_inhg: str | None
+    d_value: str | None
+    d_value_ft: str | None
     air_temperature: str | None
     air_temperature_f: str | None
     dew_point: str | None

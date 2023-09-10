@@ -103,6 +103,8 @@ def get_mission(mission_id: int, db: Session = Depends(get_db)):
                 "extrapolated_surface_pressure": observation.extrapolated_surface_pressure,
                 "extrapolated_surface_pressure_inhg":
                     observation.extrapolated_surface_pressure_inhg,
+                "d_value": observation.d_value,
+                "d_value_ft": observation.d_value_ft,
                 "air_temperature": observation.air_temperature,
                 "air_temperature_f": observation.air_temperature_f,
                 "dew_point": observation.dew_point,
