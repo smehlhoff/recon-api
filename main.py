@@ -23,7 +23,8 @@ def get_db():
 
 
 @app.get("/storms", response_model=list[StormsList])
-def get_storms(year: str = current_year, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+def get_storms(year: str = current_year, skip: int = 0, limit: int = 100,
+               db: Session = Depends(get_db)):
     query = db.query(Storm).filter_by(year=year).offset(skip).limit(limit).all()
 
     return query
@@ -40,7 +41,8 @@ def get_storm(storm_id: int, db: Session = Depends(get_db)):
 
 
 @app.get("/missions", response_model=list[MissionList])
-def get_missions(year: str = current_year, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+def get_missions(year: str = current_year, skip: int = 0, limit: int = 100,
+                 db: Session = Depends(get_db)):
     query = db.query(Mission).join(Storm).filter(Storm.year == year).offset(skip).limit(limit).all()
 
     mission_data = []
@@ -99,7 +101,8 @@ def get_mission(mission_id: int, db: Session = Depends(get_db)):
                 "aircraft_geopotential_height": observation.aircraft_geopotential_height,
                 "aircraft_geopotential_height_ft": observation.aircraft_geopotential_height_ft,
                 "extrapolated_surface_pressure": observation.extrapolated_surface_pressure,
-                "extrapolated_surface_pressure_inhg": observation.extrapolated_surface_pressure_inhg,
+                "extrapolated_surface_pressure_inhg":
+                    observation.extrapolated_surface_pressure_inhg,
                 "air_temperature": observation.air_temperature,
                 "air_temperature_f": observation.air_temperature_f,
                 "dew_point": observation.dew_point,

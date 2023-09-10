@@ -19,10 +19,11 @@ class Mission(Base):
     __tablename__ = "missions"
 
     id = Column(Integer, primary_key=True)
-    callsign = Column(String, nullable=False)
-    mission_number = Column(String, nullable=False)
+    callsign = Column(String)
+    mission_number = Column(String)
     storm_id = Column(Integer, ForeignKey("storms.id"))
-    high_density_observations = relationship("HighDensityObservation", back_populates="mission")
+    high_density_observations = relationship("HighDensityObservation",
+                                             back_populates="mission")
     storm = relationship("Storm", back_populates="missions")
 
 
@@ -30,9 +31,10 @@ class HighDensityObservation(Base):
     __tablename__ = "high_density_observations"
 
     id = Column(Integer, primary_key=True)
-    observation_number = Column(String, nullable=False)
-    product = Column(String, nullable=False)
-    transmitted = Column(String, nullable=False)
+    file = Column(String)
+    observation_number = Column(String)
+    product = Column(String)
+    transmitted = Column(String)
     mission_id = Column(Integer, ForeignKey("missions.id"))
     mission = relationship("Mission", back_populates="high_density_observations")
     observations = relationship("Observation", back_populates="high_density_observation")
@@ -73,4 +75,5 @@ class Observation(Base):
     first_flag_decoded = Column(String)
     second_flag_decoded = Column(String)
     high_density_observation_id = Column(Integer, ForeignKey("high_density_observations.id"))
-    high_density_observation = relationship("HighDensityObservation", back_populates="observations")
+    high_density_observation = relationship("HighDensityObservation",
+                                            back_populates="observations")
