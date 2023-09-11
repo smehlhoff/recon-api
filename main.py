@@ -80,6 +80,7 @@ def get_mission(mission_id: int, db: Session = Depends(get_db)):
     for hdob in query.high_density_observations:
         hdob_data = {
             "id": hdob.id,
+            "date": hdob.date,
             "observation_number": hdob.observation_number,
             "product": hdob.product,
             "transmitted": hdob.transmitted,

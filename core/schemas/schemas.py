@@ -39,6 +39,7 @@ class ObservationBase(BaseModel):
 
 class HighDensityObservationBase(BaseModel):
     id: int
+    date: str
     observation_number: str
     product: str
     transmitted: str

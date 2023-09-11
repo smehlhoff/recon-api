@@ -31,6 +31,7 @@ class HighDensityObservation(Base):
     __tablename__ = "high_density_observations"
 
     id = Column(Integer, primary_key=True)
+    date = Column(String)
     file = Column(String)
     observation_number = Column(String)
     product = Column(String)
