@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from .database import Base
@@ -22,8 +22,7 @@ class Mission(Base):
     callsign = Column(String)
     mission_number = Column(String)
     storm_id = Column(Integer, ForeignKey("storms.id"))
-    high_density_observations = relationship("HighDensityObservation",
-                                             back_populates="mission")
+    high_density_observations = relationship("HighDensityObservation", back_populates="mission")
     storm = relationship("Storm", back_populates="missions")
 
 
@@ -78,5 +77,4 @@ class Observation(Base):
     first_flag_decoded = Column(String)
     second_flag_decoded = Column(String)
     high_density_observation_id = Column(Integer, ForeignKey("high_density_observations.id"))
-    high_density_observation = relationship("HighDensityObservation",
-                                            back_populates="observations")
+    high_density_observation = relationship("HighDensityObservation", back_populates="observations")
